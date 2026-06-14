@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaArrowLeft, FaHeart, FaRegHeart, FaPaperPlane, FaReply, FaCommentDots
 } from "react-icons/fa";
