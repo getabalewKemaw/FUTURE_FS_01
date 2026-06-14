@@ -9,72 +9,56 @@ const About = () => {
   const [inView, setInView] = useState(false);
   const { title, description, resumeLink } = portfolioData.about;
 
-  // Short, professional summary text (replace with your own if needed)
-  const shortDescription = description;
-
-
-  // Intersection Observer for animation trigger
   useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.3 }
+    const node = aboutRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setInView(true),
+      { threshold: 0.25 }
     );
-    if (aboutRef.current) observer.observe(aboutRef.current);
+    observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (inView) {
-      const ctx = gsap.context(() => {
-        gsap.fromTo(
-          ".about-title",
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-        );
-        gsap.fromTo(
-          ".about-text",
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1, delay: 0.3, stagger: 0.1, ease: "power3.out" }
-        );
-        gsap.fromTo(
-          ".about-btn",
-          { opacity: 0, scale: 0.8 },
-          { opacity: 1, scale: 1, duration: 0.8, delay: 0.6, ease: "back.out(1.7)" }
-        );
-        gsap.fromTo(
-          ".about-img",
-          { opacity: 0, x: -100 },
-          { opacity: 1, x: 0, duration: 1, delay: 0.4, ease: "power3.out" }
-        );
-      }, aboutRef);
-      return () => ctx.revert();
-    }
+    if (!inView) return;
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.from(".about-title", { opacity: 0, y: 40, duration: 0.8 })
+        .from(".about-text",   { opacity: 0, y: 20, duration: 0.7, stagger: 0.1 }, "-=0.4")
+        .from(".about-btn",    { opacity: 0, scale: 0.9, duration: 0.5, ease: "back.out(1.7)" }, "-=0.3")
+        .from(".about-img",    { opacity: 0, x: -80, duration: 0.8, ease: "power3.out" }, "-=0.6");
+    }, aboutRef);
+    return () => ctx.revert();
   }, [inView]);
 
   return (
     <section
       id="about"
       ref={aboutRef}
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 bg-transparent text-white overflow-hidden w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16"
+      className="section min-h-[80vh] flex flex-col md:flex-row items-center justify-center gap-10 text-ink"
     >
-      {/* IMAGE LEFT on large screens, ABOVE on small screens */}
-      <div className="flex-1 flex justify-center mb-8 md:mb-0 md:mr-8">
-        <img
-          src="/images/hero-visual.jpg"
-          alt="Profile"
-          className="about-img w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 object-cover rounded-full border-4 border-cyan-500 shadow-lg shadow-cyan-500/30"
-        />
+      <div className="flex-1 flex justify-center mb-2 md:mb-0">
+        <div className="relative">
+          <div className="absolute -inset-3 rounded-full bg-cyan-500/15 blur-2xl" aria-hidden />
+          <img
+            src="/images/hero-visual.jpg"
+            alt="Profile"
+            className="about-img relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 object-cover rounded-full border-4 border-cyan-500 shadow-lg shadow-cyan-500/30"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
 
-      {/* TEXT RIGHT on large screens, BELOW on small screens */}
-      <div className="flex-1 flex flex-col items-center md:items-start space-y-6 font-sans">
-        <h2 className="about-title text-2xl sm:text-3xl md:text-5xl font-bold font-space text-cyan-400 text-center md:text-center w-full tracking-wider uppercase">
+      <div className="flex-1 flex flex-col items-center md:items-start space-y-5">
+        <h2 className="about-title section-title text-center md:text-center w-full">
           {title}
         </h2>
-        <div className="about-text text-gray-300 text-base sm:text-lg md:text-[1.1rem] leading-relaxed text-center md:text-left max-w-lg font-ibm-plex">
-          {shortDescription}
+        <div className="about-text text-gray-300 text-base sm:text-lg leading-relaxed text-center md:text-left max-w-xl font-ibm-plex whitespace-pre-line">
+          {description}
         </div>
-        <div className="pt-3">
+        <div className="pt-2">
           <Button
             text="Download Resume"
             icon={<FaDownload />}

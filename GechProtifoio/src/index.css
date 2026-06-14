@@ -5,58 +5,169 @@
   --font-ibm-plex: "IBM Plex Mono", monospace;
   --font-space: "Space Mono", monospace;
   --font-fira: "Fira Code", monospace;
-}
 
+  --color-canvas: #030712;
+  --color-canvas: #f6f7f9; /* light off-white base */
+  --color-canvas-deep: #eef0f3; /* slightly deeper for elements */
+  --color-ink: #0f1720; /* dark ink for readable text */
+  --color-cyan-brand: #06b6d4;
+  --color-violet-brand: #8b5cf6;
+  --color-blue-brand: #3b82f6;
+
+  --shadow-glow-cyan: 0 0 30px rgba(6, 182, 212, 0.35);
+  --shadow-glow-violet: 0 0 30px rgba(139, 92, 246, 0.35);
+
+  --radius-card: 1.5rem;
+}
 
 html,
 body,
 #root {
-  height: 100%;
-  color: white;
+  min-height: 100%;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Smooth section anchoring with navbar offset */
+/* Global typography defaults */
+body {
+  font-family: var(--font-ibm-plex);
+}
+
+/* Map project utility font classes to the root variables */
+.font-ibm-plex { font-family: var(--font-ibm-plex) !important; }
+.font-space { font-family: var(--font-space) !important; }
+.font-fira { font-family: var(--font-fira) !important; }
+
+.text-white { color: var(--color-ink) !important; }
+.bg-black\/30 { background-color: rgba(0,0,0,0.06) !important; }
+.bg-black\/70 { background-color: rgba(0,0,0,0.12) !important; }
+.border-white\/10 { border-color: rgba(0,0,0,0.06) !important; }
+.border-white\/5 { border-color: rgba(0,0,0,0.04) !important; }
+
+/* Semantic surface utilities for light theme */
+.bg-surface { background-color: rgba(15,23,32,0.04) !important; }
+.border-surface { border-color: rgba(15,23,32,0.06) !important; }
+.border-surface-weak { border-color: rgba(15,23,32,0.04) !important; }
+.text-ink { color: var(--color-ink) !important; }
+
+
+
+/* Navigation bar styling for light theme */
+nav {
+  background-color: rgba(255,255,255,0.6);
+  color: var(--color-ink);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(8px);
+}
+nav a, nav button { color: var(--color-ink) !important; }
+
+/* Form inputs and textareas */
+input, textarea, select {
+  background: rgba(15,23,32,0.04);
+  border: 1px solid rgba(15,23,32,0.06);
+  color: var(--color-ink);
+  font-family: var(--font-fira);
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(15,23,32,0.5);
+}
+
+/* Buttons that used white text should remain readable */
+.text-white.bg-gradient-to-r, button.text-white { color: #fff !important; }
+
+/* Ensure gray text is readable on light background */
+.text-gray-200, .text-gray-300, .text-gray-400 { color: #4b5563 !important; }
+.text-gray-500 { color: #374151 !important; }
+
+/* Exceptions for gray text in dark backgrounds (if any) */
+.bg-gradient-to-r .text-gray-200, .bg-gradient-to-r .text-gray-300, .bg-gradient-to-r .text-gray-400 { color: #e5e7eb !important; }
+
+/* Section anchor offset (compensates for fixed nav) */
 [id] {
   scroll-margin-top: 84px;
 }
 
-/* Background vignette for depth */
+/* Subtle body wash — pairs with the dotted canvas */
 body::before {
   content: "";
   position: fixed;
   inset: -10%;
-  background: radial-gradient(ellipse at 50% -10%, rgba(34, 211, 238, 0.18), transparent 45%),
-    radial-gradient(ellipse at -20% 120%, rgba(59, 130, 246, 0.12), transparent 55%);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(6, 182, 212, 0.03), transparent 45%),
+    radial-gradient(ellipse at -20% 120%, rgba(139, 92, 246, 0.02), transparent 55%);
   pointer-events: none;
   z-index: -20;
 }
 
-/* Glassmorphism helpers */
+/* Glassmorphism — single source of truth */
 .glass {
-  @apply bg-white/8 backdrop-blur-md border border-white/15 shadow-lg shadow-cyan-500/10;
+  background-color: rgba(0, 0, 0, 0.04); /* subtle contrast on light canvas */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.03);
+  color: var(--color-ink);
+}
+
+/* Section shell — used by every section for consistent rhythm */
+.section {
+  position: relative;
+  width: 100%;
+  max-width: 80rem;       /* max-w-7xl */
+  margin-inline: auto;
+  padding-block: 5rem;    /* py-20 */
+  padding-inline: 1.5rem; /* px-6 */
+}
+@media (min-width: 640px)  { .section { padding-inline: 3rem; } }   /* sm:px-12 */
+@media (min-width: 768px)  { .section { padding-inline: 4rem; } }   /* md:px-16 */
+@media (min-width: 1024px) { .section { padding-block: 6rem; } }   /* lg:py-24 */
+
+.section-title {
+  font-family: var(--font-space);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-cyan-brand);
+  font-size: clamp(1.875rem, 4.5vw, 3.75rem);
+  line-height: 1.05;
+}
+
+/* Heading text shadow reused by hero */
+.text-shadow {
+  text-shadow: 0 0 30px rgba(6, 182, 212, 0.35);
 }
 
 /* Animated divider dot */
 @keyframes dividerRun {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
+  0%   { left: 0%;  opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
-
 .animate-divider-dot {
   animation: dividerRun 3.6s ease-in-out infinite;
+}
+
+/* Custom scrollbar (used by Github stats recent list) */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.4);
+}
+
+/* Reduced motion: kill loops */
+@media (prefers-reduced-motion: reduce) {
+  .animate-divider-dot,
+  .animate-pulse,
+  .animate-spin {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.001ms !important;
+  }
 }

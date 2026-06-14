@@ -1,101 +1,83 @@
-import React, { useEffect, useRef } from "react";
-import Tilt from "react-parallax-tilt";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Use free Unsplash/Pexels images for better quality and variety
 const testimonialData = [
   {
-    name: "Altaseb  Cherent",
-    role: "Full stack  Developer",
+    name: "Altaseb Cherent",
+    role: "Full Stack Developer",
     image: "https://avatars.githubusercontent.com/u/185071027?v=4",
-    text: "Getabalew is a highly skilled developer! His React and collaboration  skills made our project come alive. Truly professional and punctual.",
+    text: "Getabalew is a highly skilled developer! His React and collaboration skills made our project come alive. Truly professional and punctual.",
   },
   {
-    name: "Leta kasahun",
-    role: "Full stack developer",
+    name: "Leta Kasahun",
+    role: "Full Stack Developer",
     image: "https://avatars.githubusercontent.com/u/193022391?v=4",
-    text: "Working with Getabalew was seamless. His backend  skills elevated our app, making it both intuitive and visually stunning.",
+    text: "Working with Getabalew was seamless. His backend skills elevated our app, making it both intuitive and visually stunning.",
   },
   {
     name: "Getahun Mengste",
-    role: "Front end Developer",
-    image: "images/gech.png",
-    text: "Getabalew’s attention to detail and coding skills are exceptional. He turned our concepts into interactive experiences effortlessly.",
+    role: "Front End Developer",
+    image: "/images/gech.png",
+    text: "Getabalew's attention to detail and coding skills are exceptional. He turned our concepts into interactive experiences effortlessly.",
   },
 ];
 
 const Testimonial = () => {
   const cardsRef = useRef([]);
-  const sectionRef = useRef(null);
 
   useEffect(() => {
-    cardsRef.current.forEach((el, idx) => {
-      if (el) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 40, scale: 0.9 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-            delay: idx * 0.12,
-          }
-        );
-      }
+    const triggers = cardsRef.current.map((el, idx) => {
+      if (!el) return null;
+      return gsap.fromTo(
+        el,
+        { opacity: 0, y: 40, scale: 0.92 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.6)",
+          delay: idx * 0.1,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
     });
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    return () => triggers.forEach((t) => t?.scrollTrigger?.kill());
   }, []);
 
   return (
-    <section
-      id="testimonial"
-      ref={sectionRef}
-      className="relative bg-transparent text-white py-20 w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 overflow-hidden"
-    >
-      <div className="w-full text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[#06b6d4] mb-20 font-space tracking-tight uppercase">
-          Kind Words
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-10 w-full">
-          {testimonialData.map((item, index) => (
-            <Tilt
-              key={index}
-              tiltMaxAngleX={10}
-              tiltMaxAngleY={10}
-              glareEnable={true}
-              glareMaxOpacity={0.13}
-              scale={1.04}
-              className="w-full"
-            >
-              <div
-                ref={el => (cardsRef.current[index] = el)}
-                className="glass p-7 rounded-2xl flex flex-col items-center text-center w-full h-full
-                  hover:scale-105 transition-transform duration-300"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-cyan-400/60 shadow-lg shadow-cyan-400/30 transition-all duration-300"
-                  loading="lazy"
-                />
-                <h3 className="text-lg sm:text-xl font-bold mb-1 font-fira">{item.name}</h3>
-                <p className="text-cyan-400 text-xs sm:text-sm mb-3 font-fira">{item.role}</p>
-                <p className="text-gray-300 text-sm sm:text-base font-ibm-plex leading-relaxed italic">"{item.text}"</p>
-              </div>
-            </Tilt>
-          ))}
-        </div>
+    <section id="testimonial" className="section text-white overflow-hidden">
+      <h2 className="section-title text-center mb-12 sm:mb-16">Kind Words</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {testimonialData.map((item, index) => (
+          <figure
+            key={index}
+            ref={(el) => (cardsRef.current[index] = el)}
+            className="glass group p-6 sm:p-7 rounded-2xl flex flex-col items-center text-center w-full h-full
+                       transition-transform duration-300 ease-out will-change-transform
+                       hover:-translate-y-1 hover:scale-[1.02] hover:border-cyan-400/30"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover mb-4 border-4 border-cyan-400/60 shadow-lg shadow-cyan-400/30"
+              loading="lazy"
+              decoding="async"
+            />
+            <h3 className="text-lg sm:text-xl font-bold mb-1 font-fira">{item.name}</h3>
+            <p className="text-cyan-400 text-xs sm:text-sm mb-3 font-fira uppercase tracking-widest">
+              {item.role}
+            </p>
+            <blockquote className="text-gray-300 text-sm sm:text-base font-ibm-plex leading-relaxed italic">
+              "{item.text}"
+            </blockquote>
+          </figure>
+        ))}
       </div>
     </section>
   );

@@ -1,6 +1,1 @@
-
-html, body, #root {
-  height: 100%;
-  background-color: #000; /* solid black */
-  color: white; /* default text color */
-}
+/* Deprecated — design tokens moved to index.css. Kept as a stub to avoid breaking any stray imports. */
