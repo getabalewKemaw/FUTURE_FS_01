@@ -64,12 +64,8 @@ const Blog = ({ featuredOnly = false }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {displayed.map((post, index) => (
-          <motion.article
+          <article
             key={post.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
             className="bg-white group rounded-3xl overflow-hidden border border-gray-200 shadow-sm
                        transition-all duration-300 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1
                        flex flex-col h-full"
@@ -126,7 +122,7 @@ const Blog = ({ featuredOnly = false }) => {
                 </Link>
               </div>
             </div>
-          </motion.article>
+          </article>
         ))}
       </div>
 

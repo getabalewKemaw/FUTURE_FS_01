@@ -91,7 +91,7 @@ const Experience = () => {
                 )}
 
                 <div className="flex flex-col items-center justify-center mx-4 my-2 md:my-0">
-                  <span className="flex items-center justify-center w-8 h-8 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/30 border-4 border-[#030712] z-10">
+                  <span className="flex items-center justify-center w-8 h-8 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/30 border-4 border-white z-10">
                     <FaCircle className="text-white text-[10px]" />
                   </span>
                   <span className="text-cyan-400 font-bold text-xs sm:text-sm mt-2 md:mt-3 whitespace-nowrap font-fira">
