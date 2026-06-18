@@ -77,14 +77,15 @@ const HireCTA = () => {
           >
             <FaEnvelope /> Hire Me
           </a>
-          <a
-            href="https://drive.google.com/file/d/1PxyLQlpbbmK0rnVL7Tz46qsdtZqKOtUR/view?usp=drive_link
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 bg-white border border-gray-200 text-gray-700 font-semibold px-8 py-4 rounded-2xl shadow-sm hover:border-cyan-400 hover:text-cyan-600 hover:-translate-y-1 transition-all duration-300 text-sm font-ibm-plex whitespace-nowrap"
-          >
-            <FaDownload /> View Resume
-          </a>
+     <a
+  href="https://drive.google.com/file/d/1PxyLQlpbbmK0rnVL7Tz46qsdtZqKOtUR/view?usp=drive_link"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-center gap-2.5 bg-white border border-gray-200 text-gray-700 font-semibold px-8 py-4 rounded-2xl shadow-sm hover:border-cyan-400 hover:text-cyan-600 hover:-translate-y-1 transition-all duration-300 text-sm font-ibm-plex whitespace-nowrap"
+>
+  <FaDownload />
+  View Resume
+</a>
         </div>
       </div>
     </section>
