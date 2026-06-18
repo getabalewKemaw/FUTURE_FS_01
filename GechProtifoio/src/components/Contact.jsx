@@ -139,7 +139,7 @@ const Textarea = ({ icon, name, placeholder, required }) => (
       placeholder={placeholder}
       required={required}
       rows={5}
-      className="w-full py-3 pl-10 pr-3 rounded-lg bg-surface border border-surface text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 font-fira resize-none"
+      className="w-full py-3 pl-10 pr-3 rounded-lg bg-surface border border-surface text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 font-fira resize-none focus:border-dotted"
     />
   </div>
 );

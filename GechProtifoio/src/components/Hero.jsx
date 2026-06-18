@@ -127,7 +127,7 @@ const Hero = () => {
             <div className="flex-1 p-6 font-fira text-[13px] leading-7 overflow-hidden">
               <div className="flex">
                 <span className="text-gray-300 mr-4 select-none w-4 text-right shrink-0">1</span>
-                <span className="text-gray-400"><span className="text-violet-500">const</span> <span className="text-cyan-600">engineer</span> <span className="text-gray-500">=</span> <span className="text-gray-600">{'{'}{'}'}</span></span>
+                <span className="text-gray-400"><span className="text-violet-500">const</span> <span className="text-cyan-600">engineer</span> <span className="text-gray-500">=</span> <span className="text-gray-600">{'{'}</span></span>
               </div>
               <div className="flex">
                 <span className="text-gray-300 mr-4 select-none w-4 text-right shrink-0">2</span>

@@ -67,8 +67,12 @@ nav a, nav button { color: var(--color-ink) !important; }
 input, textarea, select {
   background: rgba(15,23,32,0.04);
   border: 1px solid rgba(15,23,32,0.06);
+
   color: var(--color-ink);
   font-family: var(--font-fira);
+}
+input::focus{
+  border: dotted;
 }
 input::placeholder, textarea::placeholder {
   color: rgba(15,23,32,0.5);
