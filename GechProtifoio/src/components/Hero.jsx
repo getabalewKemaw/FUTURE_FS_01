@@ -80,7 +80,7 @@ const Hero = () => {
             </button>
 
             <a
-              href="https://drive.google.com/file/d/1jhpCOXmWqSG17GFa9oWkqv_gVNuYX3xs/view"
+              href="https://drive.google.com/file/d/1PxyLQlpbbmK0rnVL7Tz46qsdtZqKOtUR/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-700 bg-white px-8 py-4 rounded-xl border border-gray-200 hover:border-[#06b6d4] hover:text-[#06b6d4] hover:shadow-[0_0_24px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all duration-300 font-semibold text-base shadow-sm flex items-center justify-center gap-2"
