@@ -119,7 +119,7 @@ const portfolioData = {
       solution: "I architected an enterprise e-commerce ecosystem from the ground up using Next.js and PostgreSQL. The platform automates the entire order lifecycle, features role-based dashboards for administrators to manage stock levels, and integrates Chapa payment gateways to provide a frictionless, secure checkout experience for end users.",
       image: "/images/meshebesha.png",
       github: "https://github.com/getabalewKemaw/MeshebeshaDesignFrontend",
-      live: "#",
+      live: "https://meshebesha-design.vercel.app",
       technologies: ["Next.js", "TypeScript", "Express.js", "PostgreSQL", "Chapa Payment", "Tailwind CSS"],
     },
     {
